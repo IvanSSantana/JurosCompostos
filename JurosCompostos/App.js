@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, TextInput, Touchable, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import Ionicons from "@expo/vector-icons/Ionicons"
 import { useState } from 'react';
 
@@ -7,9 +7,20 @@ export default function App() {
   const [valueInit, setValueInit] = useState(null);
   const [percent, setPercent] = useState(null);
   const [time, setTime] = useState(null);
-  const [value, setValue] = useState(null);
-  const [textButton, setTextButton] = useState("Calcular");
-  const [messageImc, setMessageImc] = useState("Preencha montante, porcentagem e tempo.");
+  const [valueFinal, setValue] = useState(null);
+  const [message, setMessageJuros] = useState("Preencha os campos solicitados.");
+
+  function calculateJuros() {
+    setValue(valueInit * ((percent / 100 + 1) ** time).toFixed(2))
+  }
+
+  function messageJuros() {
+    if (valueInit != null && percent != null && time != 0)
+    {
+      calculateJuros();
+      setMessageJuros('O montante final é igual a: ');
+    }
+  }
 
   return (
     <View style={styles.container}>
@@ -22,26 +33,31 @@ export default function App() {
        style={styles.input}
        placeholder='Digite o montante inicial...'
        keyboardType='numeric'
-       onChange={setValueInit} />
+       onChangeText={setValueInit} />
 
       <TextInput
       style={styles.input}
       placeholder='Digite a porcentagem...'
       keyboardType='numeric'
-      onChange={setPercent} />
+      onChangeText={setPercent} />
 
       <TextInput
       style={styles.input}
       placeholder='Digite o tempo...'
       keyboardType='numeric'
-      onChange={setTime} />
+      onChangeText={setTime} />
     </View>
 
 
-    <TouchableOpacity style={styles.button}>
+    <TouchableOpacity style={styles.button} onPress={messageJuros}>
       <Ionicons name={"calculator-sharp"} size={30} color={"#000000"} />
-      <Text style={styles.textButton}>{textButton}</Text>
+      <Text style={styles.textButton}>Calcular</Text>
     </TouchableOpacity>
+
+    <View style={styles.jurosArea}>
+      <Text style={styles.text}>{message}</Text>
+      <Text style={styles.juros}>{valueFinal}</Text>
+    </View>
 
       <StatusBar style="auto" />
     </View>
@@ -96,5 +112,17 @@ const styles = StyleSheet.create({
     fontWeight: 500,
     paddingLeft: 5,
     paddingRight: 10
+  },
+  jurosArea: {
+    marginTop: 20,
+    marginBottom: 20,
+    justifySelf: 'center',
+    alignSelf: 'center',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  juros: {
+    fontSize: 90,
+    color: '#2156f2'
   }
 });

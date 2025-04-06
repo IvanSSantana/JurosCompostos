@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TextInput, TouchableOpacity, View, Keyboard } from 'react-native';
 import Ionicons from "@expo/vector-icons/Ionicons"
 import { useState } from 'react';
 
@@ -17,6 +17,7 @@ export default function App() {
   function messageJuros() {
     if (valueInit != null && percent != null && time != 0)
     {
+      Keyboard.dismiss()
       calculateJuros();
       setMessageJuros('O montante final é igual a: ');
     }
@@ -25,32 +26,35 @@ export default function App() {
   return (
     <View style={styles.container}>
       <View style={styles.titleBox}>
-        <Text style={styles.titleText}>Juros Compostos - Casas Bahia</Text>
+        <Text style={styles.titleText}>Juros Compostos</Text>
       </View>
 
     <View style={styles.inputArea}>
       <TextInput
        style={styles.input}
        placeholder='Digite o montante inicial...'
+       placeholderTextColor={'#b6c8e0'}
        keyboardType='numeric'
        onChangeText={setValueInit} />
 
       <TextInput
       style={styles.input}
       placeholder='Digite a porcentagem...'
+      placeholderTextColor={'#b6c8e0'}
       keyboardType='numeric'
       onChangeText={setPercent} />
 
       <TextInput
       style={styles.input}
       placeholder='Digite o tempo...'
+      placeholderTextColor={'#b6c8e0'}
       keyboardType='numeric'
       onChangeText={setTime} />
     </View>
 
 
     <TouchableOpacity style={styles.button} onPress={messageJuros}>
-      <Ionicons name={"calculator-sharp"} size={30} color={"#000000"} />
+      <Ionicons name={"calculator-sharp"} size={30} color={"#b6c8e0"} />
       <Text style={styles.textButton}>Calcular</Text>
     </TouchableOpacity>
 
@@ -59,7 +63,7 @@ export default function App() {
       <Text style={styles.juros}>{valueFinal}</Text>
     </View>
 
-      <StatusBar style="auto" />
+      <StatusBar style="light" backgroundColor={"#131a36"} />
     </View>
   );
 }
@@ -67,22 +71,26 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#90a5d6',
   },
   titleBox: {
+    height: '7%',
+    width: '80%',
+    backgroundColor: '#6d8dd6',
+    borderRadius: 14,
+    marginTop: '20%',
+    alignSelf: 'center',
+    paddingVertical: 5,
+    borderWidth: 2,
+    borderColor: '#3a5799',
     alignItems: 'center',
-    justifyContent: 'flex-start',
-    height: '20%',
-    width: '100%',
-    backgroundColor: '#c9c7c7',
-    borderBottomStartRadius: 25,
-    borderBottomEndRadius: 25
+    justifyContent: 'center'
   },
   titleText: {
+    display: 'flex',
     fontSize: 20,
     fontWeight: 'bold',
-    paddingTop: 70,
-    color: '#2156f2'
+    color: '#2156f2',
   },
   inputArea: {
     display: 'flex',
@@ -96,22 +104,26 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#2156f2',
     width: '70%',
-    borderRadius: 5
+    borderRadius: 5,
+    backgroundColor: '#7188bf',
   },
   button: {
     display: 'flex',
     alignSelf: 'center',
     borderWidth: 1,
+    borderColor: '#2156f2',
     marginTop: 40,
     flexDirection: 'row',
     alignItems: 'center',
-    borderRadius: 5
+    borderRadius: 5,
+    backgroundColor: '#7188bf',
   },
   textButton: {
     fontSize: 25,
     fontWeight: 500,
     paddingLeft: 5,
-    paddingRight: 10
+    paddingRight: 10,
+    color: '#b6c8e0'
   },
   jurosArea: {
     marginTop: 20,
@@ -124,5 +136,9 @@ const styles = StyleSheet.create({
   juros: {
     fontSize: 90,
     color: '#2156f2'
+  },
+  text: {
+    fontSize: 20,
+    color: '#2c499e'
   }
 });

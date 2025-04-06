@@ -24,6 +24,7 @@ export default function App() {
   }
 
   return (
+    
     <View style={styles.container}>
       <View style={styles.titleBox}>
         <Text style={styles.titleText}>Juros Compostos</Text>
@@ -104,6 +105,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#2156f2',
     width: '70%',
+    color: '#b6c8e0',
     borderRadius: 5,
     backgroundColor: '#7188bf',
   },

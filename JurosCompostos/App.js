@@ -30,17 +30,17 @@ export default function App() {
         <Text style={styles.titleText}>Juros Compostos</Text>
       </View>
 
-    <View style={styles.inputArea}>
       <TextInput
-       style={styles.input}
+       style={styles.input0}
        placeholder='Digite o montante inicial...'
        placeholderTextColor={'#b6c8e0'}
        keyboardType='numeric'
-       onChangeText={setValueInit} />
+       onChangeText={setValueInit} />      
 
+    <View style={styles.inputArea}>
       <TextInput
       style={styles.input}
-      placeholder='Digite a porcentagem...'
+      placeholder='Digite a %...'
       placeholderTextColor={'#b6c8e0'}
       keyboardType='numeric'
       onChangeText={setPercent} />
@@ -95,19 +95,31 @@ const styles = StyleSheet.create({
   },
   inputArea: {
     display: 'flex',
-    flexDirection: 'column',
+    flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 40,
-    gap: 40
+    gap: 20
   },
-  input: {
+  input0: {
     borderWidth: 1,
     borderColor: '#2156f2',
     width: '70%',
     color: '#b6c8e0',
     borderRadius: 5,
     backgroundColor: '#7188bf',
+    marginTop: 40,
+    marginHorizontal: 'auto'
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: '#2156f2',
+    width: '32%',
+    color: '#b6c8e0',
+    borderRadius: 5,
+    backgroundColor: '#7188bf',
+    height: '40',
+    flexWrap: 'nowrap'
   },
   button: {
     display: 'flex',
@@ -128,7 +140,7 @@ const styles = StyleSheet.create({
     color: '#b6c8e0'
   },
   jurosArea: {
-    marginTop: 20,
+    marginTop: 60,
     marginBottom: 20,
     justifySelf: 'center',
     alignSelf: 'center',
